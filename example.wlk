@@ -24,13 +24,18 @@ class NaveCapital {
   method alejarseUnPocoDelSol(){
     direccion = (direccion-1).max(-10)
   }
+  method prepararViaje()
 }
   class NavesBaliza inherits NaveCapital{
-    var baliza = "verde"
+    var baliza = "azul"
     method cambiarColorDeBaliza(colorNuevo){
       baliza = colorNuevo
     }
     method colorBaliza() = baliza
+    override method prepararViaje(){
+      self.cambiarColorDeBaliza("verde")
+      self.ponerParaleloAlSol()
+    }
   }
 
   class NavePasajeros inherits NaveCapital{
@@ -50,6 +55,11 @@ class NaveCapital {
     method descargarComida(cantComida){
       racionesDeComida -= cantComida
     }
+    override method prepararViaje(){
+      self.cargarComida(4*pasajeros)
+      self.cargarBebidas(6*pasajeros)
+      self.acercarUnPocoAlSol()
+    }
   }
 
 class NaveCombate inherits NaveCapital{
@@ -62,9 +72,35 @@ class NaveCombate inherits NaveCapital{
     }
     method estaInvisible() = estaInvisible
     
-    method emitirMensaje(mensaje){
-      
+    var misilesDesplegados = true
+    method desplegarMisiles(){
+      misilesDesplegados = true
     }
+    method replegarMisiles(){
+      misilesDesplegados = false
+    }
+    method misilesDesplegados() = misilesDesplegados
+    
+    const mensajes = []
+    method emitirMensaje(mensaje){
+      mensajes.add(mensaje)
+    }
+    method mensajesEmitidos(){
+      return mensajes.all()
+    }
+    method primerMensajeEmitido(){
+      return mensajes.first()
+    }
+    method ultimoMensajeEmitido(){
+      return mensajes.last()
+    }
+    method esEscueta(){
+      return 
+    }
+    method emitioMensaje(mensaje){
+      return mensajes.any(mensaje)
+    }
+
 }
 
   const nave = new NaveCapital()
